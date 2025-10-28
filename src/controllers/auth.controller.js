@@ -7,6 +7,7 @@ export const register = (req, res) => {
 }
 
 export const login = (req,res) => {
+  //  throw(new Error('This is my way'))
    res.json({
    msg : 'Login Controller',
    body : req.body
