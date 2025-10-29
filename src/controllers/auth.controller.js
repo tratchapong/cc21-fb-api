@@ -2,17 +2,18 @@ import bcrypt from 'bcryptjs'
 import createHttpError from "http-errors"
 import identityKeyUtil from "../utils/identity-key.util.js"
 import prisma from "../config/prisma.config.js"
-
+import { registerSchema } from '../validations/schema.js'
 
 export const register = async (req, res, next) => {
   const {identity, firstName, lastName, password, confirmPassword} = req.body
   // validation
-  if(!identity.trim() || !firstName.trim() || !lastName.trim() || !password.trim() || !confirmPassword.trim()) {
-    return next(createHttpError[400]('fill all inputs'))
-  }
-  if(confirmPassword !== password) {
-    return next(createHttpError[400]('check confirm-password '))
-  }
+  const rs = registerSchema.parse(req.body)
+  console.log(rs)
+
+  // if(confirmPassword !== password) {
+  //   return next(createHttpError[400]('check confirm-password '))
+  // }
+
   // check Identity is email or mobile
   const identityKey = identityKeyUtil(identity)
 
