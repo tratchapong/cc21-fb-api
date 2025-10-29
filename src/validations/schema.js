@@ -11,3 +11,7 @@ export const registerSchema = z.object({
 	path: ['confirmPassword']
 })
 
+export const loginSchema = z.object({
+	identity : z.string().min(2, "Email or phone-number require"),
+	password : z.string().min(4, "password at least 4 characters"),
+})
