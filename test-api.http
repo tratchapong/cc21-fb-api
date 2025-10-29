@@ -1,3 +1,6 @@
+GET http://localhost:8899/api/shutdown/
+###
+
 GET http://localhost:8899/api/auth/
 ###
 
