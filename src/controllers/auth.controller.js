@@ -50,6 +50,6 @@ export const login = async (req, res, next) => {
 }
 
 export const getMe = (req, res) => {
-  res.json({ msg: 'GetMe controller' })
+  res.json({ user: req.user })
 }
 
