@@ -8,14 +8,16 @@ import { loginSchema, registerSchema } from '../validations/schema.js'
 export const register = async (req, res, next) => {
   const { identity, firstName, lastName, password, confirmPassword } = req.body
   // validation
-  const rs = registerSchema.parse(req.body)
+  const user = registerSchema.parse(req.body)
+
 
   // check Identity is email or mobile
-  const identityKey = identityKeyUtil(identity)
+  // const identityKey = identityKeyUtil(identity)
 
-  if (!identityKey) {
-    return next(createHttpError[400]('identity must be email or phone number'))
-  }
+  // if (!identityKey) {
+  //   return next(createHttpError[400]('identity must be email or phone number'))
+  // }
+  const identityKey = user.email ? 'email' : 'mobile'
 
   // find user if already have registered
   const haveUser = await prisma.user.findUnique({
@@ -41,14 +43,14 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   const { identity, password } = req.body
   const user = loginSchema.parse(req.body)
-  const identityKey = identityKeyUtil(identity)
+  // const identityKey = identityKeyUtil(identity)
 
-  if (!identityKey) {
-    return next(createHttpError[400]('identity must be email or phone number'))
-  }
+  // if (!identityKey) {
+  //   return next(createHttpError[400]('identity must be email or phone number'))
+  // }
 
   const foundUser = await prisma.user.findUnique({
-    where : { [identityKey] : identity}
+    where : { [user.email? 'email' : 'mobile'] : identity}
   })
 // have no this user
   if(!foundUser) {
@@ -72,7 +74,7 @@ export const login = async (req, res, next) => {
     msg: 'Login Successful',
     token: token,
     // user : ให้ส่งข้อมูล user โดยไม่มี password, createdAt, updatedAt
-    user: userData
+    user : userData
   })
 }
 

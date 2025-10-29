@@ -1,7 +1,13 @@
 import { z } from "zod";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const mobileRegex = /^[0-9]{10,15}$/
+
 export const registerSchema = z.object({
-	identity : z.string().min(2, "Email or phone-number require"),
+	identity : z.string().min(2, "Email or phone-number require")
+	.refine(value => emailRegex.test(value) || mobileRegex.test(value), {
+		message : "identity must be a valid email or mobile number"
+	}),
 	firstName : z.string().min(2, "first name is required"),
 	lastName : z.string().min(2, "last name is required"),
 	password : z.string().min(4, "password at least 4 characters"),
@@ -12,6 +18,16 @@ export const registerSchema = z.object({
 })
 
 export const loginSchema = z.object({
-	identity : z.string().min(2, "Email or phone-number require"),
+	identity : z.string().min(2, "Email or phone-number require")
+	.refine(value => emailRegex.test(value) || mobileRegex.test(value), {
+		message : "identity must be a valid email or mobile number"
+	}),
 	password : z.string().min(4, "password at least 4 characters"),
+}).transform( data => {
+	const key = emailRegex.test(data.identity) ? "email" : "mobile"
+	const newValue = {...data, [key] : data.identity}
+	return newValue
 })
+
+// จัดการให้ identity ให้เปลี่ยนเป็น email หรือ mobile ได้อย่างถูกต้อง
+
