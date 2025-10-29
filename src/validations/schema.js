@@ -15,6 +15,12 @@ export const registerSchema = z.object({
 }).refine( data => data.password === data.confirmPassword , {
 	message : 'confirmPassword must match password',
 	path: ['confirmPassword']
+}).transform( data => {
+	const key = emailRegex.test(data.identity) ? "email" : "mobile"
+	const newValue = {...data, [key] : data.identity}
+	delete newValue.identity;
+	delete newValue.confirmPassword;
+	return newValue
 })
 
 export const loginSchema = z.object({
@@ -29,5 +35,4 @@ export const loginSchema = z.object({
 	return newValue
 })
 
-// จัดการให้ identity ให้เปลี่ยนเป็น email หรือ mobile ได้อย่างถูกต้อง
 

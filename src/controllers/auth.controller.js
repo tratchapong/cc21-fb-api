@@ -9,16 +9,7 @@ export const register = async (req, res, next) => {
   const { identity, firstName, lastName, password, confirmPassword } = req.body
   // validation
   const user = registerSchema.parse(req.body)
-
-
-  // check Identity is email or mobile
-  // const identityKey = identityKeyUtil(identity)
-
-  // if (!identityKey) {
-  //   return next(createHttpError[400]('identity must be email or phone number'))
-  // }
   const identityKey = user.email ? 'email' : 'mobile'
-
   // find user if already have registered
   const haveUser = await prisma.user.findUnique({
     where: { [identityKey]: identity }
@@ -26,33 +17,20 @@ export const register = async (req, res, next) => {
   if (haveUser) {
     return next(createHttpError[409]('This user already register'))
   }
-
-  const newUser = {
-    [identityKey]: identity,
-    password: await bcrypt.hash(password, 10),
-    firstName: firstName,
-    lastName: lastName
-  }
-  const result = await prisma.user.create({ data: newUser })
+  const result = await prisma.user.create({ data: user })
   res.json({
     msg: 'Register Successful',
-    result: result
+    result
   })
 }
 
 export const login = async (req, res, next) => {
   const { identity, password } = req.body
   const user = loginSchema.parse(req.body)
-  // const identityKey = identityKeyUtil(identity)
-
-  // if (!identityKey) {
-  //   return next(createHttpError[400]('identity must be email or phone number'))
-  // }
-
   const foundUser = await prisma.user.findUnique({
     where : { [user.email? 'email' : 'mobile'] : identity}
   })
-// have no this user
+  // have no this user
   if(!foundUser) {
     return next(createHttpError[401]('Invalid Login'))
   }
@@ -61,19 +39,15 @@ export const login = async (req, res, next) => {
   if(!pwOk) {
     return next(createHttpError[401]('Invalid Login'))
   }
-
   const payload = { id: foundUser.id }
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     algorithm: 'HS256',
     expiresIn: '15d'
   })
-  // console.log(token)
   const {password: pw, createdAt, updatedAt, ...userData} = foundUser
-
   res.json({
     msg: 'Login Successful',
     token: token,
-    // user : ให้ส่งข้อมูล user โดยไม่มี password, createdAt, updatedAt
     user : userData
   })
 }
