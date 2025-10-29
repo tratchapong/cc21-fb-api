@@ -5,7 +5,7 @@ const authRoute = Router()
 
 authRoute.post('/register', register)
 authRoute.post('/login', login)
-authRoute.get('/me',getMe)
+authRoute.get('/me', getMe)
 
 export default authRoute
 
