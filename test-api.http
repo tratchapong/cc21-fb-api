@@ -1,9 +1,14 @@
+# Get me
+GET http://localhost:8899/api/auth/me
+Authorization: Bearer 
+###
+
 # Register api
 POST http://localhost:8899/api/auth/register HTTP/1.1
 content-type: application/json
 
 {
-"identity" : "1111111114",
+ "identity" : "1111111116",
 #  "identity" : "someone@ggg.mail",
  "firstName" : "someone",
  "lastName" : "codecamp",
