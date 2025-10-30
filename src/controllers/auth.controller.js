@@ -8,10 +8,10 @@ import { loginSchema, registerSchema } from '../validations/schema.js'
 export const register = async (req, res, next) => {
   const { identity, firstName, lastName, password, confirmPassword } = req.body
   // validation
-  const rs = registerSchema.parse(req.body)
-
+  const user = registerSchema.parse(req.body)
+  // console.log(user)
   // check Identity is email or mobile
-  const identityKey = identityKeyUtil(identity)
+  const identityKey = user.email ? 'email' : 'mobile'
 
   if (!identityKey) {
     return next(createHttpError[400]('identity must be email or phone number'))
@@ -25,12 +25,8 @@ export const register = async (req, res, next) => {
     return next(createHttpError[409]('This user already register'))
   }
 
-  const newUser = {
-    [identityKey]: identity,
-    password: await bcrypt.hash(password, 10),
-    firstName: firstName,
-    lastName: lastName
-  }
+  const newUser = {...user, password: await bcrypt.hash(password, 10) }
+  
   const result = await prisma.user.create({ data: newUser })
   res.json({
     msg: 'Register Successful',
@@ -39,13 +35,16 @@ export const register = async (req, res, next) => {
 }
 
 export const login = async (req, res, next) => {
-  const { identity, password } = req.body
-  const user = loginSchema.parse(req.body)
-  const identityKey = identityKeyUtil(identity)
 
-  if (!identityKey) {
-    return next(createHttpError[400]('identity must be email or phone number'))
-  }
+  const { identity, password } = req.body
+  // validate with zod
+  const user = loginSchema.parse(req.body)
+  // console.log(user)
+  const identityKey = user.email ? 'email' : 'mobile'
+
+  // if (!identityKey) {
+  //   return next(createHttpError[400]('identity must be email or phone number'))
+  // }
 
   const foundUser = await prisma.user.findUnique({
     where : { [identityKey] : identity}
