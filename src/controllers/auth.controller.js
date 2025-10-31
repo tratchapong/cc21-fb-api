@@ -29,7 +29,7 @@ export const register = async (req, res, next) => {
   
   const result = await createUser(newUser)
   res.json({
-    msg: 'Register Successful',
+    message: 'Register Successful',
     result: result
   })
 }
@@ -66,7 +66,7 @@ export const login = async (req, res, next) => {
   const {password: pw, createdAt, updatedAt, ...userData} = foundUser
 
   res.json({
-    msg: 'Login Successful',
+    message: 'Login Successful',
     token: token,
     // user : ให้ส่งข้อมูล user โดยไม่มี password, createdAt, updatedAt
     user: userData
