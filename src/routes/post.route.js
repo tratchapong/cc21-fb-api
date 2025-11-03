@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { createPost } from "../controllers/post.controller.js";
+import { createPost, getAllPosts } from "../controllers/post.controller.js";
 
 const postRoute = Router()
 
+postRoute.get('/', getAllPosts)
 postRoute.post('/', createPost)
 
 

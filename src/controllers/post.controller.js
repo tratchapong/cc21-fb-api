@@ -1,10 +1,23 @@
 import prisma from "../config/prisma.config.js"
 
 
+export const getAllPosts = async (req,res) => {
+	const result = await prisma.post.findMany({
+		orderBy : { createdAt : 'desc'},
+		include : { 
+			user : { select : { 
+				firstName : true, lastName: true, profileImage: true
+			}}
+		}
+	})
+	res.json({posts: result})
+}
+
 export const createPost = async (req, res) => {
 	const {message, image} = req.body
+	console.log(req.user)
 
-	const data = {message, image, userId: req.user}
+	const data = {message, image, userId: req.user.id}
 
 	const result = await prisma.post.create( {data })
 

@@ -1,4 +1,5 @@
 export default (err,req,res,next)=>{
+	console.log(err)
 	if(err.name === 'ZodError') {
 		return res.status(400).json({
 			success: false,
