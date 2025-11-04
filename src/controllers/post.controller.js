@@ -7,7 +7,15 @@ export const getAllPosts = async (req,res) => {
 		include : { 
 			user : { select : { 
 				firstName : true, lastName: true, profileImage: true
-			}}
+			}},
+			comments : { 
+				include : {
+					user : { select : {
+						firstName : true, lastName: true, profileImage: true
+					}}
+				}
+			 },
+			 likes : true
 		}
 	})
 	res.json({posts: result})

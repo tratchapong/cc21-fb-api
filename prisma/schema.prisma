@@ -39,7 +39,7 @@ model Post {
  createdAt     DateTime      @default(now()) @db.Timestamp(0)
  updatedAt     DateTime      @updatedAt @db.Timestamp(0)
  userId        Int
- user          User          @relation(fields: [userId], references: [id])
+ user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
  comments      Comment[]
  likes         Like[]
 }
@@ -50,17 +50,17 @@ model Comment {
  createdAt     DateTime      @default(now()) @db.Timestamp(0)
  updatedAt     DateTime      @updatedAt @db.Timestamp(0)
  postId        Int
- post          Post          @relation(fields: [postId], references: [id])
+ post          Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
  userId        Int
- user          User          @relation(fields: [userId], references: [id])
+ user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Like {
  userId        Int
  postId        Int
  createdAt     DateTime      @default(now()) @db.Timestamp(0)
- user          User          @relation(fields: [userId], references: [id])
- post          Post          @relation(fields: [postId], references: [id])      
+ user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+ post          Post          @relation(fields: [postId], references: [id], onDelete: Cascade)      
  @@id([userId, postId])
 }
 
