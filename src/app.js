@@ -10,6 +10,7 @@ import notFoundMiddleware from './middlewares/notFound.middleware.js'
 import shutdownUtil from './utils/shutdown.util.js'
 import postRoute from './routes/post.route.js'
 import authenticateMiddleware from './middlewares/authenticate.middleware.js'
+import likeRoute from './routes/like.route.js'
 
 const app = express()
 app.use(morgan("dev"))
@@ -28,9 +29,9 @@ app.use(cors({
 app.use(express.json())
 
 app.use('/api/auth', authRoute)
+app.use('/api/post/like', authenticateMiddleware, likeRoute )
 app.use('/api/post', authenticateMiddleware, postRoute)
 app.use('/api/comment', (req, res)=>{ res.send('comment service')})
-app.use('/api/like', (req, res)=>{ res.send('like service')})
 
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)
