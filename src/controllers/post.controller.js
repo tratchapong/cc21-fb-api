@@ -54,3 +54,24 @@ export const deletePost = async (req, res, next) => {
 		message: 'Delete done'
 	})
 }
+
+export const updatePost = async (req, res,next) => {
+	const {id} = req.params
+	const {message, image} = req.body
+
+	const foundPost = await prisma.post.findUnique({
+		where : { id : +id}
+	})
+	if(!foundPost || req.user.id !== foundPost.userId) {
+		return next (createHttpError[400]('Cannot edit this post'))
+	}
+
+	const result = await prisma.post.update({
+		where : { id: +id},
+		data : {message, image}
+	})
+	res.json({
+		message: 'Update post done',
+		result
+	})
+}

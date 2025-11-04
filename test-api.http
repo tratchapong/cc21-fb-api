@@ -1,3 +1,21 @@
+# Update Post
+PUT http://localhost:8899/api/post/29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjQyMzkxLCJleHAiOjE3NjM1MzgzOTF9.hMulttBuPwHzpJ21HoduVcJ1qR8se3D8RHmeTG_Eo80
+content-type: application/json
+
+{
+	"message" : "We are fullstack dev next month",
+	"image" : ""
+}
+
+###
+
+#Delete post
+DELETE http://localhost:8899/api/post/24
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjQyMzkxLCJleHAiOjE3NjM1MzgzOTF9.hMulttBuPwHzpJ21HoduVcJ1qR8se3D8RHmeTG_Eo80
+
+###
+
 # Get all posts
 GET http://localhost:8899/api/post
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYxNzk2OTA4LCJleHAiOjE3NjMwOTI5MDh9.7cz4XaZ5QvHy-xEioKNY5oGnNyeh5rCkjpJ6aaxfbZk
@@ -27,7 +45,7 @@ POST http://localhost:8899/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
- "identity" : "andy@ggg.mail",
+ "identity" : "2222222222",
  "password" : "123456"
 }
 ###
