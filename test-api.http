@@ -1,4 +1,4 @@
-# Get me
+# Get all posts
 GET http://localhost:8899/api/post
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYxNzk2OTA4LCJleHAiOjE3NjMwOTI5MDh9.7cz4XaZ5QvHy-xEioKNY5oGnNyeh5rCkjpJ6aaxfbZk
 
