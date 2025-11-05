@@ -1,6 +1,19 @@
+#UnLike
+DELETE  http://localhost:8899/api/post/2/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMzE0NTQyLCJleHAiOjE3NjM2MTA1NDJ9.4YEEDKo6nzuJ7QLbn6DP5VoaZiNMihUhsqnS-oT30uk
+
+###
+
+#Like
+POST http://localhost:8899/api/post/2/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMzE0NTQyLCJleHAiOjE3NjM2MTA1NDJ9.4YEEDKo6nzuJ7QLbn6DP5VoaZiNMihUhsqnS-oT30uk
+content-type: application/json
+
+###
+
 # Update Post
 PUT http://localhost:8899/api/post/29
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjQyMzkxLCJleHAiOjE3NjM1MzgzOTF9.hMulttBuPwHzpJ21HoduVcJ1qR8se3D8RHmeTG_Eo80
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjY1MDEzLCJleHAiOjE3NjM1NjEwMTN9.ucPSz3HzZ-1CM0XjSezaaaxzkAGB1NZar8nMi3Dq_98
 content-type: application/json
 
 {
@@ -12,17 +25,17 @@ content-type: application/json
 
 #Delete post
 DELETE http://localhost:8899/api/post/24
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjQyMzkxLCJleHAiOjE3NjM1MzgzOTF9.hMulttBuPwHzpJ21HoduVcJ1qR8se3D8RHmeTG_Eo80
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjY1MDEzLCJleHAiOjE3NjM1NjEwMTN9.ucPSz3HzZ-1CM0XjSezaaaxzkAGB1NZar8nMi3Dq_98
 
 ###
 
 # Get all posts
 GET http://localhost:8899/api/post
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYxNzk2OTA4LCJleHAiOjE3NjMwOTI5MDh9.7cz4XaZ5QvHy-xEioKNY5oGnNyeh5rCkjpJ6aaxfbZk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMzE0NTQyLCJleHAiOjE3NjM2MTA1NDJ9.4YEEDKo6nzuJ7QLbn6DP5VoaZiNMihUhsqnS-oT30uk
 
 ###
 GET http://localhost:8899/api/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYxNzk2OTA4LCJleHAiOjE3NjMwOTI5MDh9.7cz4XaZ5QvHy-xEioKNY5oGnNyeh5rCkjpJ6aaxfbZk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzYyMjY1MDEzLCJleHAiOjE3NjM1NjEwMTN9.ucPSz3HzZ-1CM0XjSezaaaxzkAGB1NZar8nMi3Dq_98
 
 ###
 
