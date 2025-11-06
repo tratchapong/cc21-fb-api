@@ -1,8 +1,8 @@
 CC21-Fakebook-API
 ===
 ### env guide
-PORT=  
-DATABASE_URL=  
+PORT=8899 
+DATABASE_URL=mysql://USER:PASSWORD@HOST:PORT/DATABASE  
 JWT_SECRET=  
 
 ---
